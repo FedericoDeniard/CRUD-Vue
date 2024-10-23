@@ -3,11 +3,18 @@ from schemas.user_schema import UserSchema
 from config import users
 from bson.objectid import ObjectId
 from pymongo.errors import DuplicateKeyError
+import bcrypt
 
 def create_user(user_data: dict):
     user_schema = UserSchema()
     try:
         validated_user = user_schema.load(user_data.__dict__)
+
+        password = validated_user['password'].encode('utf-8')
+        hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+        print(hashed_password)
+        validated_user['password'] = hashed_password.decode('utf-8')
+        
         result = users.insert_one(validated_user)
         validated_user['_id'] = str(result.inserted_id)
         return {"message": "User created successfully", "user": validated_user}, 201
