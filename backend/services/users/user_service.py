@@ -12,7 +12,6 @@ def create_user(user_data: dict):
 
         password = validated_user['password'].encode('utf-8')
         hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
-        print(hashed_password)
         validated_user['password'] = hashed_password.decode('utf-8')
         
         result = users.insert_one(validated_user)
