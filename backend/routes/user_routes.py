@@ -1,9 +1,10 @@
 from flask import Blueprint, request, jsonify
-from schemas.user_schema import  UserSchema
 from models.user_model import User
 from services.users.user_utils import convert_user
 from services.users.user_service import create_user, delete_user, get_user, modify_user
 from config import users
+from schemas.response import Response
+from datetime import datetime
 
 
 user_blueprint = Blueprint('user', __name__)
@@ -15,19 +16,22 @@ def add_user():
         transformed_data = convert_user(user_data)
         user = User(**transformed_data)
     except Exception as err:
-        return {"error": str(err)}, 400
+        response = Response("error", 400, error={"error": str(err)})
+        return response.to_dict(), 400
     result, status = create_user(user)  
-    return jsonify(result), status
+    response = Response("success", 201, data=result)
+    return response.to_dict(), status
 
 @user_blueprint.route('/user/<user_id>', methods=['GET'])
 def get_user_route(user_id):
     user, status = get_user(user_id)
-    return user, status
+    response = Response("success" if status == 200 else "error", status, data=user)
+    return response.to_dict(), status
 
 @user_blueprint.route("/delete_user/<user_id>", methods=["DELETE"])
 def delete_user_route(user_id):
-
-    return delete_user(user_id)
+    result, status = delete_user(user_id)
+    response = Response("success" if status == 200 else "error", status, data=result)
 
 @user_blueprint.route("/users/<user_id>/edit", methods=["PUT"])
 def edit_user_route(user_id):
