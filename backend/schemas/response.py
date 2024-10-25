@@ -7,7 +7,7 @@ class Response:
         self.data = data
         self.error = error
     
-    def to_dict(self):
+    def to_dict(self) -> dict:
         response = {
             "status": self.status,
             "status_code": self.status_code,

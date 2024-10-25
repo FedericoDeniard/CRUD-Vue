@@ -34,7 +34,7 @@ def delete_user(user_id):
         if user:
             user_schema = UserSchema()
             users.delete_one({"_id": ObjectId(user_id)})
-            return {"user": user_schema.dump(user)}, 200
+            return {"deleted_juser": user_schema.dump(user)}, 200
         else:
             return {"error": "User not found"}, 404
     except Exception as err:

@@ -222,7 +222,7 @@ export default {
         }
 
         const res = await newUser.json()
-        this.successMessages.push(res.message)
+        this.successMessages.push(res.data.message)
 
         this.model.user = {
           user: '',
@@ -237,6 +237,7 @@ export default {
         }
       } catch (error) {
         this.errors.push(error.message)
+        console.log(error)
       } finally {
         this.showModal = false
       }
