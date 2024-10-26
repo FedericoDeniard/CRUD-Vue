@@ -2,8 +2,8 @@
   <div class="wrapper">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <RouterLink class="navbar-brand" to="/">CRUD Deeper Systems</RouterLink>
-         <!-- <button
+        <RouterLink class="navbar-brand" to="/">CRUD Vue-Flask</RouterLink>
+        <!-- <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'Navbar',
-  }
+export default {
+  name: 'Navbar',
+}
 </script>
