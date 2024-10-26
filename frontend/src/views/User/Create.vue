@@ -217,7 +217,6 @@ export default {
 
         if (!newUser.ok) {
           const res = await newUser.json()
-          console.log(res)
           this.errors.push(res.data.error)
           return
         }
@@ -238,7 +237,6 @@ export default {
         }
       } catch (error) {
         this.errors.push(error.message)
-        console.log(error)
       } finally {
         this.showModal = false
       }
