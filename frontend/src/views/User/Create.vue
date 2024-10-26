@@ -217,7 +217,8 @@ export default {
 
         if (!newUser.ok) {
           const res = await newUser.json()
-          this.errors.push(res.error)
+          console.log(res)
+          this.errors.push(res.data.error)
           return
         }
 

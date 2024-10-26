@@ -18,7 +18,7 @@ def add_user():
         response = Response("error", 400, error={"error": str(err)})
         return response.to_dict(), 400
     result, status = create_user(user)  
-    response = Response("success", 201, data=result)
+    response = Response("success" if status == 201 else "error", status, data=result)
     return response.to_dict(), status
 
 @user_blueprint.route('/user/<user_id>', methods=['GET'])

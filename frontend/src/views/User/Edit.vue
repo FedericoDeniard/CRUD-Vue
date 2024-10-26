@@ -188,8 +188,8 @@ export default {
         }
         this.errors = []
         const res = await editedUser.json()
-        console.log(res)
-        this.successMessages.push(res.message)
+
+        this.successMessages.push(res.data.message)
       } catch (error) {
         this.errors.push(error.message)
       } finally {
@@ -220,7 +220,6 @@ export default {
         }
         this.errors = []
         const res = await user.json()
-        console.log(res)
 
         this.model.user.user = res.data.username || ''
         this.model.user.password = res.data.password || ''
