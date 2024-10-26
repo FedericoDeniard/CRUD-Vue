@@ -188,8 +188,8 @@ export default {
         }
         this.errors = []
         const res = await editedUser.json()
-        console.log(res)
-        this.successMessages.push(res.message)
+
+        this.successMessages.push(res.data.message)
       } catch (error) {
         this.errors.push(error.message)
       } finally {
@@ -221,16 +221,16 @@ export default {
         this.errors = []
         const res = await user.json()
 
-        this.model.user.user = res.username || ''
-        this.model.user.password = res.password || ''
-        this.model.user.repeatPassword = res.password || ''
-        this.model.user.is_user_admin = res.roles.includes('admin')
-        this.model.user.is_user_manager = res.roles.includes('manager')
-        this.model.user.is_user_tester = res.roles.includes('tester')
-        this.model.user.user_timezone = res.preferences.timezone || ''
-        this.model.user.is_user_active = res.active
+        this.model.user.user = res.data.username || ''
+        this.model.user.password = res.data.password || ''
+        this.model.user.repeatPassword = res.data.password || ''
+        this.model.user.is_user_admin = res.data.roles.includes('admin')
+        this.model.user.is_user_manager = res.data.roles.includes('manager')
+        this.model.user.is_user_tester = res.data.roles.includes('tester')
+        this.model.user.user_timezone = res.data.preferences.timezone || ''
+        this.model.user.is_user_active = res.data.active
         this.model.user.created_at = new Date(
-          res.created_ts * 1000,
+          res.data.created_ts * 1000,
         ).toISOString()
       } catch (error) {
         this.errors.push(error.message)

@@ -100,7 +100,7 @@ export default {
         const url = import.meta.env.VITE_API_URL + '/users'
         const response = await fetch(url)
         const data = await response.json()
-        this.users = data
+        this.users = data.data
       } catch (error) {
         console.error('Error fetching users:', error)
       }

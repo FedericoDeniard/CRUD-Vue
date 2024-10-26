@@ -217,12 +217,12 @@ export default {
 
         if (!newUser.ok) {
           const res = await newUser.json()
-          this.errors.push(res.error)
+          this.errors.push(res.data.error)
           return
         }
 
         const res = await newUser.json()
-        this.successMessages.push(res.message)
+        this.successMessages.push(res.data.message)
 
         this.model.user = {
           user: '',
